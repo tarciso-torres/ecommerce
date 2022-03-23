@@ -15,7 +15,7 @@ public class EmailService {
                 emailService::parse,
                 String.class,
                 Map.of())) {
-            service.rum();
+            service.run();
         }
     }
 
