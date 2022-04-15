@@ -49,7 +49,6 @@ public class BatchSendMessageService {
             userDispatcher.send(message.getPayload(), user.getUuid(),
                    message.getId().continueWith(BatchSendMessageService.class.getSimpleName()), user);
         }
-
     }
 
     private List<User> getAllUsers() throws SQLException {
