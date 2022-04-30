@@ -1,7 +1,9 @@
-package com.redfort.ecommerce;
+package com.redfort.ecommerce.consumer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.redfort.ecommerce.Message;
+import com.redfort.ecommerce.MessageAdapter;
 import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Deserializer;
 

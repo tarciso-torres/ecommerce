@@ -1,5 +1,7 @@
 package com.redfort.ecommerce;
 
+import com.redfort.ecommerce.dispatcher.KafkaDispatcher;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -16,11 +18,15 @@ public class NewOrderMain {
                     var orderId = UUID.randomUUID().toString();
                     var amount = new BigDecimal(Math.random() * 5000 + 1);
 
+                    var id = new CorrelationId(NewOrderMain.class.getSimpleName());
+
                     var order = new Order(orderId, amount, email);
-//                    orderDispatcher.send("ECOMMERCE_NEW_ORDER", email, order);
-//
-//                    var emailCode = "Thank you for your order! We are processing your order!";
-//                    emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email, emailCode);
+                    orderDispatcher.send("ECOMMERCE_NEW_ORDER", email,
+                            id, order);
+
+                    var emailCode = "Thank you for your order! We are processing your order!";
+                    emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email,
+                            id, emailCode);
                 }
             }
         }

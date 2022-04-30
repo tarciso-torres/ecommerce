@@ -1,5 +1,7 @@
 package com.redfort.ecommerce;
 
+import com.redfort.ecommerce.dispatcher.KafkaDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

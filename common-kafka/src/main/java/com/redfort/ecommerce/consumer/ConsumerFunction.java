@@ -1,5 +1,6 @@
-package com.redfort.ecommerce;
+package com.redfort.ecommerce.consumer;
 
+import com.redfort.ecommerce.Message;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.concurrent.ExecutionException;

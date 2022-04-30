@@ -1,5 +1,7 @@
 package com.redfort.ecommerce;
 
+import com.redfort.ecommerce.consumer.KafkaService;
+import com.redfort.ecommerce.dispatcher.KafkaDispatcher;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.math.BigDecimal;
