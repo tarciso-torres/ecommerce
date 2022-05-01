@@ -1,37 +1,35 @@
 package com.redfort.ecommerce;
 
-import com.redfort.ecommerce.consumer.KafkaService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class EmailService {
+public class EmailService implements ConsumerService<String> {
 
-    public static void main(String args[]) throws IOException, ExecutionException, InterruptedException {
-
-        var emailService = new EmailService();
-        try(var service = new KafkaService(EmailService.class.getSimpleName(),
-                "ECOMMERCE_SEND_EMAIL",
-                emailService::parse,
-                Map.of())) {
-            service.run();
-        }
+    public static void main(String args[]) throws ExecutionException, InterruptedException {
+        new ServiceProvider().run(EmailService::new);
     }
 
-        private void parse(ConsumerRecord<String,Message<String>> record) {
-            System.out.println("-------------------------------------------");
-            System.out.println("Send email");
-            System.out.println("key: " + record.key());
-            System.out.println("value: " + record.value());
-            System.out.println("partition: " + record.partition());
-            System.out.println("offset: " + record.offset());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Email sent");
+    public String getConsumerGroup() {
+        return EmailService.class.getSimpleName();
+    }
+
+    public String getTopic() {
+        return "ECOMMERCE_SEND_EMAIL";
+    }
+
+    public void parse(ConsumerRecord<String, Message<String>> record) {
+        System.out.println("-------------------------------------------");
+        System.out.println("Send email");
+        System.out.println("key: " + record.key());
+        System.out.println("value: " + record.value());
+        System.out.println("partition: " + record.partition());
+        System.out.println("offset: " + record.offset());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println("Email sent");
+    }
 }
